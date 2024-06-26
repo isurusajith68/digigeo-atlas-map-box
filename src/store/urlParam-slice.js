@@ -40,5 +40,3 @@ export const useLatLong = create((set) => ({
   setlong: (long) => set({ long }),
   setlat: (lat) => set({ lat }),
 }));
-
-

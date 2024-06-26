@@ -80,3 +80,11 @@
 .ol-attribution {
   display: none;
 }
+
+.mapboxgl-ctrl-bottom-right {
+  display: none;
+}
+
+ [mapboxgl-children] {
+    display: none;
+  }

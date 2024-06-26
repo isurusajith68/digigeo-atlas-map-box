@@ -25,7 +25,7 @@ const stroke = new Stroke({
 });
 
 export const fPropertyVectorRendererFunc = (pixelCoordinates, state) => {
-  //  console.log("sssss", state);
+   console.log("sssss", state);
 
   const context = state.context;
   const geometry = state.geometry.clone();
