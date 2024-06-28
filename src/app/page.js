@@ -42,6 +42,7 @@ export default function Home() {
     }
   }, []);
 
+  
   return (
     <div
       style={{
@@ -49,8 +50,8 @@ export default function Home() {
         minWidth: isCollapsed ? "99.9vw" : "calc(100vw - 260px)",
       }}
     >
-      {/* <LandingMap /> */}
-      <MapBox />
+      <LandingMap />
+      {/* <MapBox /> */}
     </div>
   );
 }

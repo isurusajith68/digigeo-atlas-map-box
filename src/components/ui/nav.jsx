@@ -1,17 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { Map } from "lucide-react";
+import { Info, Map, Search, WorkflowIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
 import { Separator } from "./separator";
 import Legend from "../sidebar/legend/legend";
+import { SearchClick } from "@/store/side-bar-slice";
 
 export function Nav({ isCollapsed }) {
   const pathname = usePathname();
   // console.log("pathname", pathname);
+
+  const { isSearchBtnClick, setIsSearchBtnClick } = SearchClick();
 
   return (
     <div
@@ -24,7 +27,7 @@ export function Nav({ isCollapsed }) {
             ""
           ) : (
             <>
-              <Link
+              {/* <Link
                 href="/"
                 className={cn(
                   buttonVariants({
@@ -43,7 +46,29 @@ export function Nav({ isCollapsed }) {
               >
                 <Map className="h-6 w-6 mr-6" />
                 Map
-              </Link>
+              </Link> */}
+              <div className="px-5 flex justify-start items-center gap-5">
+                <div className="bg-background text-foreground">
+                  <WorkflowIcon className="cursor-pointer" />
+                </div>
+                <div
+                  className={
+                    isSearchBtnClick
+                      ? "bg-black text-white cursor-pointer p-2 dark:bg-white dark:text-black rounded-lg"
+                      : "cursor-pointer p-2"
+                  }
+                >
+                  <Search
+                    className="cursor-pointer "
+                    onClick={() => {
+                      setIsSearchBtnClick(!isSearchBtnClick);
+                    }}
+                  />
+                </div>
+                <div className="bg-background text-foreground">
+                  <Info className="cursor-pointer" />
+                </div>
+              </div>
               <Separator />
               <Legend />
             </>

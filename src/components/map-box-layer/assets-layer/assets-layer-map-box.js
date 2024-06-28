@@ -103,7 +103,7 @@ const AssetsLayerMapBox = () => {
       cache: "no-cache",
       credentials: "same-origin",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Typ e": "application/json",
       },
     })
       .then((response) => response.json())

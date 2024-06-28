@@ -24,7 +24,22 @@ import VectorImageLayer from "../map-layers/claim-vector-image-layer/vector-imag
 import AssetsLayer from "../map-layers/assets-layer/assets-layer";
 import SyncPropVectorLayer from "../map-layers/sync-prop-vector-layer/sync-prop-vector-layer";
 import ClaimLinkLayer from "../map-layers/claim-link-vector-layer/claim-link-layer";
+import MVT from "ol/format/MVT";
+import { createMapboxStreetsV6Style } from "./maps-style";
+import { Fill, Icon, Stroke, Style, Text } from "ol/style";
+import SearchPopUp from "../search-pop-up/search-pop-up";
+import { SearchClick } from "@/store/side-bar-slice";
 
+export const format = new MVT();
+
+export const style = createMapboxStreetsV6Style(
+  Style,
+  Fill,
+  Stroke,
+  Icon,
+  Text
+);
+export const key = process.env.NEXT_PUBLIC_MAPBOX_API_TOKEN;
 const LandingMap = () => {
   const DOTS_PER_INCH = 72;
   const INCHES_PER_METRE = 39.37;
@@ -34,7 +49,7 @@ const LandingMap = () => {
   const { initialCenter, setInitialCenter } = useInitialCenter();
   const { setlong, setlat } = useLatLong();
   const { zoom, setZoom } = useMapZoom();
-
+  const { isSearchBtnClick,  } = SearchClick();
   const [fPropRenderCount, setfPropRenderCount] = useState(0);
 
   const mapRef = useRef();
@@ -107,6 +122,7 @@ const LandingMap = () => {
       <MapLayerControlPanel />
       <MapCoordinatesDisplay />
       <MapLayerLoadingSpiner />
+      {isSearchBtnClick && <SearchPopUp />}
       <div>
         <Map
           onPointermove={onPointerMove}
@@ -121,13 +137,13 @@ const LandingMap = () => {
             ref={mapViewRef}
             zoom={zoom}
           />
-          <olLayerTile preload={Infinity}>
-            <olSourceXYZ
-              args={{
-                url: `https://mt0.google.com/vt/lyrs=${selectedMap}&hl=en&x={x}&y={y}&z={z}`,
-              }}
-            ></olSourceXYZ>
-          </olLayerTile>
+          <olLayerVectorTile declutter style={style}>
+            <olSourceVectorTile
+              // attributions={attributions}
+              format={format}
+              url={`https://{a-d}.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6/{z}/{x}/{y}.vector.pbf?access_token=${key}`}
+            />
+          </olLayerVectorTile>
           <AreaBoundaryLayer />
           <ClaimLinkLayer />
           <VectorImageLayer />
