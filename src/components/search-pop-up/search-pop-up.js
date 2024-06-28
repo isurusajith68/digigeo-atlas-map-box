@@ -36,39 +36,39 @@ const SearchPopUp = () => {
   const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
   console.log(selectedCheckboxes);
   return (
-    <Draggable>
-      <div className="absolute flex top-2 left-20 z-10 bg-background text-foreground  rounded-lg p-2 w-[500px] flex-col resize overflow-auto min-w-[500px] min-h-[300px] ">
-        <div className="flex justify-between w-full border-b p-2">
+    <Draggable className="resize overflow-auto">
+      <div className="absolute flex top-2 left-20 z-10 bg-background ring ring-gray-500 shadow-sm text-foreground  rounded-lg  w-[500px] flex-col  min-w-[500px] min-h-[300px] ">
+        <div className="flex justify-between w-full border-b p-2 bg-slate-400 read-only">
           <div className="flex items-center justify-center">
-            <h1 className="font-semibold ">Global Search</h1>
+            <h1 className="font-semibold text-white">Global Search</h1>
           </div>
           <div className="flex items-center justify-center">
             <X
-              className="cursor-pointer"
+              className="cursor-pointer text-white"
               onClick={() => setIsSearchBtnClick(!isSearchBtnClick)}
             />
           </div>
         </div>
         <div>
           <div className="flex w-full max-w-[450px] items-center space-x-2 p-2 ">
-            <Input type="email" placeholder="Search" />
-            <Button type="submit">Search</Button>
+            <Input type="search" placeholder="Search" />
+            <Button type="search">Search</Button>
           </div>
-          <div className="flex flex-wrap gap-2">
-            <div className="flex-1">
+          <div className="flex flex-wrap gap-2 p-2">
+            <div className="flex-1 ">
               <Collapsible>
                 <CollapsibleTrigger className="w-full">
-                  <div className="flex items-center gap-10 p-2 border-b justify-between px-5">
-                    <h1 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                  <div className="flex items-center gap-10 p-2 border rounded-lg justify-between px-5">
+                    <h1 className="text-sm font-medium leading-none ">
                       {selectedCheckboxes.length > 0 ? (
                         <div className="flex flex-wrap flex-row">
-                          {selectedCheckboxes.map((item, index) => {
-                            return (
-                              <span className="text-xs" key={index}>
-                                {item} /{" "}
-                              </span>
-                            );
-                          })}
+                          {selectedCheckboxes.length === 4
+                            ? "All Layers"
+                            : selectedCheckboxes.map((item) => (
+                                <>
+                                  <span className="text-sm">{item} /</span>
+                                </>
+                              ))}
                         </div>
                       ) : (
                         "Layers"
@@ -81,8 +81,41 @@ const SearchPopUp = () => {
                   <div className="ml-3">
                     <div className="flex items-center gap-3 mt-3">
                       <Checkbox
-                        id="layers"
+                        id="All layer"
+                        value="All layer"
+                        checked={selectedCheckboxes.length === 4}
+                        onClick={(e) => {
+                          if (
+                            selectedCheckboxes.includes("Featured layer") &&
+                            selectedCheckboxes.includes(
+                              "Sync property layer"
+                            ) &&
+                            selectedCheckboxes.includes("Claim link layer") &&
+                            selectedCheckboxes.includes("Assets layer")
+                          ) {
+                            setSelectedCheckboxes([]);
+                          } else {
+                            setSelectedCheckboxes([
+                              "Featured layer",
+                              "Sync property layer",
+                              "Claim link layer",
+                              "Assets layer",
+                            ]);
+                          }
+                        }}
+                      />
+                      <label
+                        htmlFor=" All layer"
+                        className="text-sm font-medium leading-none "
+                      >
+                        All layer
+                      </label>
+                    </div>
+                    <div className="flex items-center gap-3 mt-3">
+                      <Checkbox
+                        id="Featured layer"
                         value="Featured layer"
+                        checked={selectedCheckboxes.includes("Featured layer")}
                         onClick={(e) => {
                           if (selectedCheckboxes.includes(e.target.value)) {
                             setSelectedCheckboxes(
@@ -99,16 +132,19 @@ const SearchPopUp = () => {
                         }}
                       />
                       <label
-                        htmlFor="layers"
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        htmlFor=" Featured layer"
+                        className="text-sm font-medium leading-none "
                       >
                         Featured layer
                       </label>
                     </div>
                     <div className="flex items-center gap-3 mt-3">
                       <Checkbox
-                        id="layers"
+                        id="Sync property layer"
                         value="Sync property layer"
+                        checked={selectedCheckboxes.includes(
+                          "Sync property layer"
+                        )}
                         onClick={(e) => {
                           if (selectedCheckboxes.includes(e.target.value)) {
                             setSelectedCheckboxes(
@@ -125,16 +161,19 @@ const SearchPopUp = () => {
                         }}
                       />
                       <label
-                        htmlFor="layers"
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        htmlFor="Sync property layer"
+                        className="text-sm font-medium leading-none "
                       >
                         Sync property layer
                       </label>
                     </div>
                     <div className="flex items-center gap-3 mt-3">
                       <Checkbox
-                        id="layers"
+                        id="Claim link layer"
                         value="Claim link layer"
+                        checked={selectedCheckboxes.includes(
+                          "Claim link layer"
+                        )}
                         onClick={(e) => {
                           if (selectedCheckboxes.includes(e.target.value)) {
                             setSelectedCheckboxes(
@@ -151,16 +190,17 @@ const SearchPopUp = () => {
                         }}
                       />
                       <label
-                        htmlFor="layers"
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        htmlFor="Claim link layer"
+                        className="text-sm font-medium leading-none "
                       >
                         Claim link layer
                       </label>
                     </div>
                     <div className="flex items-center gap-3 mt-3">
                       <Checkbox
-                        id="layers"
+                        id="Assets layer"
                         value="Assets layer"
+                        checked={selectedCheckboxes.includes("Assets layer")}
                         onClick={(e) => {
                           if (selectedCheckboxes.includes(e.target.value)) {
                             setSelectedCheckboxes(
@@ -177,8 +217,8 @@ const SearchPopUp = () => {
                         }}
                       />
                       <label
-                        htmlFor="layers"
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        htmlFor="Assets layer"
+                        className="text-sm font-medium leading-none "
                       >
                         Assets layer
                       </label>
