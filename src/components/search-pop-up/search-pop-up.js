@@ -1,14 +1,8 @@
 import { SearchClick } from "@/store/side-bar-slice";
-import {
-  ArrowDownFromLine,
-  PanelTopClose,
-  PanelTopCloseIcon,
-  X,
-} from "lucide-react";
+import { ArrowDownFromLine, X } from "lucide-react";
 
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { ModalPopup } from "../ui-custom/dialog-v2-popup";
 import {
   Collapsible,
   CollapsibleContent,
@@ -34,11 +28,12 @@ import { useState } from "react";
 const SearchPopUp = () => {
   const { isSearchBtnClick, setIsSearchBtnClick } = SearchClick();
   const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
-  console.log(selectedCheckboxes);
+  const [selectRadio, setSelectRadio] = useState("world");
+
   return (
     <Draggable className="resize overflow-auto">
       <div className="absolute flex top-2 left-20 z-10 bg-background ring ring-gray-500 shadow-sm text-foreground  rounded-lg  w-[500px] flex-col  min-w-[500px] min-h-[300px] ">
-        <div className="flex justify-between w-full border-b p-2 bg-slate-400 read-only">
+        <div className="flex justify-between w-full border-b p-2 bg-slate-400 read-only rounded-t-lg">
           <div className="flex items-center justify-center">
             <h1 className="font-semibold text-white">Global Search</h1>
           </div>
@@ -64,9 +59,13 @@ const SearchPopUp = () => {
                         <div className="flex flex-wrap flex-row">
                           {selectedCheckboxes.length === 4
                             ? "All Layers"
-                            : selectedCheckboxes.map((item) => (
+                            : selectedCheckboxes.map((item, index) => (
                                 <>
-                                  <span className="text-sm">{item} /</span>
+                                  <span className="text-sm">
+                                    {item}
+                                    {index !== selectedCheckboxes.length - 1 &&
+                                      "/ "}
+                                  </span>
                                 </>
                               ))}
                         </div>
@@ -108,7 +107,7 @@ const SearchPopUp = () => {
                         htmlFor=" All layer"
                         className="text-sm font-medium leading-none "
                       >
-                        All layer
+                        Select All layer
                       </label>
                     </div>
                     <div className="flex items-center gap-3 mt-3">
@@ -228,18 +227,22 @@ const SearchPopUp = () => {
               </Collapsible>
             </div>
             <div className="flex-1 ">
-              <RadioGroup defaultValue="option-one" className="flex mt-2">
+              <RadioGroup
+                defaultValue="world"
+                className="flex mt-2"
+                onValueChange={(value) => setSelectRadio(value)}
+              >
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="option-one" id="option-one" />
-                  <Label htmlFor="option-one">World</Label>
+                  <RadioGroupItem value="world" id="world" />
+                  <Label htmlFor="world">World</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="option-two" id="option-two" />
-                  <Label htmlFor="option-two">View</Label>
+                  <RadioGroupItem value="view" id="view" />
+                  <Label htmlFor="view">View</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="option-two" id="option-two" />
-                  <Label htmlFor="option-two">B-Box</Label>
+                  <RadioGroupItem value="b-box" id="b-box" />
+                  <Label htmlFor="b-box">B-Box</Label>
                 </div>
               </RadioGroup>
             </div>

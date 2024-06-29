@@ -35,7 +35,7 @@ const NavBar = () => {
   return (
     <>
       {isDesktop ? (
-        <div className="flex items-center justify-between h-16 px-2 ">
+        <div className="flex items-center justify-between h-16 px-2 border-b">
           <div className="text-xl font-bold">Digi Geo Atlas</div>
           <div className="flex space-x-7">
             <Link href="/" className=" flex gap-2 justify-center items-center">

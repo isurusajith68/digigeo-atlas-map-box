@@ -49,7 +49,7 @@ const LandingMap = () => {
   const { initialCenter, setInitialCenter } = useInitialCenter();
   const { setlong, setlat } = useLatLong();
   const { zoom, setZoom } = useMapZoom();
-  const { isSearchBtnClick,  } = SearchClick();
+  const { isSearchBtnClick } = SearchClick();
   const [fPropRenderCount, setfPropRenderCount] = useState(0);
 
   const mapRef = useRef();
@@ -137,22 +137,35 @@ const LandingMap = () => {
             ref={mapViewRef}
             zoom={zoom}
           />
-          <olLayerVectorTile declutter style={style}>
-            <olSourceVectorTile
-              // attributions={attributions}
-              format={format}
-              url={`https://{a-d}.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6/{z}/{x}/{y}.vector.pbf?access_token=${key}`}
-            />
-          </olLayerVectorTile>
+          {selectedMap === "m" && (
+            <olLayerVectorTile declutter style={style} preload={Infinity}>
+              <olSourceVectorTile
+                // attributions={attributions}
+                format={format}
+                url={`https://{a-d}.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6/{z}/{x}/{y}.vector.pbf?access_token=${key}`}
+              />
+            </olLayerVectorTile>
+          )}
+          {(selectedMap === "s" || selectedMap === "p") && (
+            <olLayerTile preload={Infinity}>
+              <olSourceXYZ
+                args={{
+                  url: `https://mt0.google.com/vt/lyrs=${selectedMap}&hl=en&x={x}&y={y}&z={z}`,
+                }}
+              ></olSourceXYZ>
+            </olLayerTile>
+          )}
+
+         
           <AreaBoundaryLayer />
           <ClaimLinkLayer />
           <VectorImageLayer />
 
-          <FPropLayer
+          {/* <FPropLayer
             mapRef={mapRef}
             fPropRenderCount={fPropRenderCount}
             setfPropRenderCount={setfPropRenderCount}
-          />
+          /> */}
 
           <AssetsLayer />
           <SyncPropVectorLayer />

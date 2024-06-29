@@ -21,7 +21,6 @@ const SideBar = () => {
     <div className="border">
       <Nav
         isCollapsed={isCollapsed}
-       
       />
     </div>
   );
