@@ -1,37 +1,14 @@
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import {
-  useAssetsLayerVisibility,
-  useClaimLinkLayerVisibility,
-  useClaimVectorLayerVisibility,
-  usetoggeleLegend,
-} from "@/store/layer-slice";
-import {
-  ChevronsDown,
-  ChevronsRight,
-  Eye,
-  EyeOffIcon,
-  Layers,
-  Layers3,
-} from "lucide-react";
-import { useEffect, useState } from "react";
+import { usetoggeleLegend } from "@/store/layer-slice";
+import { ChevronsDown, ChevronsRight, Layers3 } from "lucide-react";
 import PropertyFeatures from "./property/property-features";
+import { Asset } from "next/font/google";
+import AssetFeatures from "./asset-features/asset-features";
+import ClaimFeatures from "./claim-link-vector/claim-features";
 
 const Legend = () => {
   const { toggleLegendOpen, setToggleLegend } = usetoggeleLegend();
-
-  const { claimVectorLayerVisibility, setClaimVectorLayerVisibility } =
-    useClaimVectorLayerVisibility();
-
-  const { claimLinkLayerVisibility, setClaimLinkLayerVisibility } =
-    useClaimLinkLayerVisibility();
-
-  const { assetsLayerVisibility, setAssetsLayerVisibility } =
-    useAssetsLayerVisibility();
-
-  const [claimVectorLayerToggle, setClaimVectorLayerToggle] = useState(false);
-  const [claimLinkLayerToggle, setClaimLinkLayerToggle] = useState(false);
-  const [assetsLayerToggle, setAssetsLayerToggle] = useState(false);
 
   return (
     <div>
@@ -42,7 +19,7 @@ const Legend = () => {
             size: "sm",
           }),
 
-          "justify-start w-full cursor-pointer"
+          "justify-start w-full cursor-pointer h-8"
         )}
         onClick={() => setToggleLegend(!toggleLegendOpen)}
       >
@@ -61,9 +38,16 @@ const Legend = () => {
         )}
       </div>
 
-      <div className="pl-2  gap-2 flex flex-col p-2">
+      <div
+        className="pl-2  gap-2 flex flex-col p-2  overflow-auto"
+        style={{
+          maxHeight: "calc(100vh - 190px)",
+        }}
+      >
         <PropertyFeatures />
-        <div className="flex justify-between items-center p-1 gap-3 bg-zinc-200 rounded-lg">
+        <AssetFeatures />
+        <ClaimFeatures />
+        {/* <div className="flex justify-between items-center p-1 gap-3 bg-zinc-200 dark:bg-white dark:text-black rounded-lg">
           <div className="flex gap-2 items-center">
             <Layers className="h-4 w-4 " />
             <span className="text-sm"> Claim Link Layer</span>
@@ -98,7 +82,7 @@ const Legend = () => {
             )}
           </div>
         </div>
-        <div className="flex justify-between items-center p-1  gap-3 bg-zinc-200 rounded-lg">
+        <div className="flex justify-between items-center p-1  gap-3 bg-zinc-200 dark:bg-white dark:text-black rounded-lg">
           <div className="flex gap-2 items-center">
             <Layers className="h-4 w-4 " />
             <span className="text-sm"> Assets Layer</span>
@@ -129,7 +113,7 @@ const Legend = () => {
             )}
           </div>
         </div>
-        <div className="flex justify-between items-center p-1 gap-3 bg-zinc-200 rounded-lg">
+        <div className="flex justify-between items-center p-1 gap-3 bg-zinc-200 dark:bg-white dark:text-black rounded-lg">
           <div className="flex gap-2 items-center">
             <Layers className="h-4 w-4 " />
             <span className="text-sm">Claim Vector Layer</span>
@@ -167,7 +151,7 @@ const Legend = () => {
               />
             )}
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

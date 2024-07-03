@@ -47,7 +47,7 @@ export function Nav({ isCollapsed }) {
                 <Map className="h-6 w-6 mr-6" />
                 Map
               </Link> */}
-              <div className="px-5 flex justify-start items-center gap-5">
+              <div className="px-5 flex justify-start items-center gap-5 h-8">
                 <div className="bg-background text-foreground">
                   <WorkflowIcon className="cursor-pointer" />
                 </div>

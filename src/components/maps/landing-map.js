@@ -29,6 +29,7 @@ import { createMapboxStreetsV6Style } from "./maps-style";
 import { Fill, Icon, Stroke, Style, Text } from "ol/style";
 import SearchPopUp from "../search-pop-up/search-pop-up";
 import { SearchClick } from "@/store/side-bar-slice";
+import AssetsClusterLayer from "../map-layers/assets-clustter-layer/assets-clustter-layer";
 
 export const format = new MVT();
 
@@ -137,7 +138,7 @@ const LandingMap = () => {
             ref={mapViewRef}
             zoom={zoom}
           />
-          {selectedMap === "m" && (
+          {/* {selectedMap === "m" && (
             <olLayerVectorTile declutter style={style} preload={Infinity}>
               <olSourceVectorTile
                 // attributions={attributions}
@@ -145,8 +146,11 @@ const LandingMap = () => {
                 url={`https://{a-d}.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6/{z}/{x}/{y}.vector.pbf?access_token=${key}`}
               />
             </olLayerVectorTile>
-          )}
-          {(selectedMap === "s" || selectedMap === "p") && (
+          )} */}
+
+          {(selectedMap === "m" ||
+            selectedMap === "s" ||
+            selectedMap === "p") && (
             <olLayerTile preload={Infinity}>
               <olSourceXYZ
                 args={{
@@ -156,7 +160,6 @@ const LandingMap = () => {
             </olLayerTile>
           )}
 
-         
           <AreaBoundaryLayer />
           <ClaimLinkLayer />
           <VectorImageLayer />
@@ -167,6 +170,7 @@ const LandingMap = () => {
             setfPropRenderCount={setfPropRenderCount}
           /> */}
 
+          <AssetsClusterLayer />
           <AssetsLayer />
           <SyncPropVectorLayer />
         </Map>

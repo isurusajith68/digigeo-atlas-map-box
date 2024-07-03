@@ -5,6 +5,7 @@ import { map_tbl_sync_claimlink_VectorLayerStyleFunction } from "./claim-link-st
 import { useLayerVectorClaimLinkLoading } from "@/store/landing-map-slice";
 import { useZustand } from "use-zustand";
 import { useClaimLinkLayerVisibility } from "@/store/layer-slice";
+import { usePropertyOutlinesVisibility } from "@/store/property-sidebar-btn";
 
 const ClaimLinkLayer = () => {
   const claimLinkVectorLayerRef = useRef(null);
@@ -24,9 +25,9 @@ const ClaimLinkLayer = () => {
     (state) => state.setVectorClaimLinkLoading
   );
 
-  const claimLinkLayerVisibility = useZustand(
-    useClaimLinkLayerVisibility,
-    (state) => state.claimLinkLayerVisibility
+  const propertyOutlinesVisibility = useZustand(
+    usePropertyOutlinesVisibility,
+    (state) => state.propertyOutlinesVisibility
   );
 
   const syncClaimLinkLoaderFunc = useCallback(
@@ -70,12 +71,12 @@ const ClaimLinkLayer = () => {
 
   //claim link layer visibility
   useEffect(() => {
-    if (claimLinkLayerVisibility) {
+    if (propertyOutlinesVisibility) {
       claimLinkVectorLayerRef.current.setVisible(true);
     } else {
       claimLinkVectorLayerRef.current.setVisible(false);
     }
-  }, [claimLinkLayerVisibility]);
+  }, [propertyOutlinesVisibility]);
 
   return (
     <olLayerVector

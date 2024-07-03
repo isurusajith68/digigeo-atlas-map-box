@@ -1,24 +1,24 @@
 import { create } from "zustand";
 
 export const usetoggeleLegend = create((set) => ({
-  toggleLegendOpen: false,
+  toggleLegendOpen: true,
   setToggleLegend: (toggleLegendOpen) => set({ toggleLegendOpen }),
 }));
 
 export const useClaimLinkLayerVisibility = create((set) => ({
-  claimLinkLayerVisibility: false,
+  claimLinkLayerVisibility: true,
   setClaimLinkLayerVisibility: (claimLinkLayerVisibility) =>
     set({ claimLinkLayerVisibility }),
 }));
 
 export const useAssetsLayerVisibility = create((set) => ({
-  assetsLayerVisibility: false,
+  assetsLayerVisibility: true,
   setAssetsLayerVisibility: (assetsLayerVisibility) =>
     set({ assetsLayerVisibility }),
 }));
 
 export const useClaimVectorLayerVisibility = create((set) => ({
-  claimVectorLayerVisibility: false,
+  claimVectorLayerVisibility: true,
   setClaimVectorLayerVisibility: (claimVectorLayerVisibility) =>
     set({ claimVectorLayerVisibility }),
 }));

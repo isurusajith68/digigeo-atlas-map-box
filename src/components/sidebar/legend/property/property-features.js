@@ -1,4 +1,3 @@
-
 import {
   ChevronsDown,
   ChevronsRight,
@@ -9,57 +8,50 @@ import {
 import { useState } from "react";
 import PropertyFeaturesSub from "./property-features-sub";
 import { useSyncPropertyLayerVisibility } from "@/store/layer-slice";
-
+import {
+  usePropertyLabelVisibility,
+  usePropertyOutlinesVisibility,
+  usePropertyPointsVisibility,
+} from "@/store/property-sidebar-btn";
+import LayerComponentsWidgets from "@/components/layer-components-widgets/layer-componets-widgets";
 
 const PropertyFeatures = () => {
   const { syncPropertyLayerVisibility, setSyncPropertyLayerVisibility } =
     useSyncPropertyLayerVisibility();
-    
 
-  const [syncPropertyLayerToggle, setSyncPropertyLayerToggle] = useState(false);
+  const [syncPropertyLayerToggle, setSyncPropertyLayerToggle] = useState(true);
+
+  const { propertyLabelVisibility, setPropertyLabelVisibility } =
+    usePropertyLabelVisibility();
+  const { propertyPointsVisibility, setPropertyPointsVisibility } =
+    usePropertyPointsVisibility();
+  const { propertyOutlinesVisibility, setPropertyOutlinesVisibility } =
+    usePropertyOutlinesVisibility();
 
   return (
-    <div>
-      <div className="flex justify-between items-center p-1  gap-3 bg-zinc-200 rounded-lg">
-        <div className="flex gap-2 items-center">
-          <Layers className="h-4 w-4 " />
-          <span className="text-sm ">Property</span>
-        </div>
-        <div className="flex gap-2 items-center">
-          {syncPropertyLayerVisibility ? (
-            <Eye
-              onClick={() =>
-                setSyncPropertyLayerVisibility(!syncPropertyLayerVisibility)
-              }
-              className="h-4 w-4 cursor-pointer"
-            />
-          ) : (
-            <EyeOffIcon
-              onClick={() =>
-                setSyncPropertyLayerVisibility(!syncPropertyLayerVisibility)
-              }
-              className="h-4 w-4 cursor-pointer text-gray-400"
-            />
-          )}
-          {syncPropertyLayerToggle ? (
-            <ChevronsDown
-              onClick={() =>
-                setSyncPropertyLayerToggle(!syncPropertyLayerToggle)
-              }
-              className="h-4 w-4 cursor-pointer"
-            />
-          ) : (
-            <ChevronsRight
-              onClick={() =>
-                setSyncPropertyLayerToggle(!syncPropertyLayerToggle)
-              }
-              className="h-4 w-4 cursor-pointer"
-            />
-          )}
-        </div>
-      </div>
-      {syncPropertyLayerToggle && <PropertyFeaturesSub />}
-    </div>
+    <LayerComponentsWidgets
+      layerComponentsName={"Property"}
+      visibility={syncPropertyLayerVisibility}
+      setVisibility={setSyncPropertyLayerVisibility}
+      toggle={syncPropertyLayerToggle}
+      setToggle={setSyncPropertyLayerToggle}
+      layersArray={[
+        {
+          visibility: propertyLabelVisibility,
+          setVisibility: setPropertyLabelVisibility,
+        },
+        {
+          visibility: propertyPointsVisibility,
+          setVisibility: setPropertyPointsVisibility,
+        },
+        {
+          visibility: propertyOutlinesVisibility,
+          setVisibility: setPropertyOutlinesVisibility,
+        },
+      ]}
+    >
+      <PropertyFeaturesSub />
+    </LayerComponentsWidgets>
   );
 };
 export default PropertyFeatures;
