@@ -30,6 +30,7 @@ import { Fill, Icon, Stroke, Style, Text } from "ol/style";
 import SearchPopUp from "../search-pop-up/search-pop-up";
 import { SearchClick } from "@/store/side-bar-slice";
 import AssetsClusterLayer from "../map-layers/assets-clustter-layer/assets-clustter-layer";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 export const format = new MVT();
 
@@ -117,12 +118,17 @@ const LandingMap = () => {
     });
   }, [initialCenter, isCollapsed, selectedMap, zoom]);
 
+  const isDes = useMediaQuery("(min-width: 768px)");
+  console.log(isCollapsed, isDes, "isCollapsed, isDes");
+
+  console.log(isCollapsed || isDes);
+
   return (
     <div className="relative">
       <MapControlPanel mapRef={mapRef} mapViewRef={mapViewRef} />
       <MapLayerControlPanel />
-      <MapCoordinatesDisplay />
-      <MapLayerLoadingSpiner />
+      {(isCollapsed || isDes) && <MapCoordinatesDisplay />}
+      {(isCollapsed || isDes) && <MapLayerLoadingSpiner />}
       {isSearchBtnClick && <SearchPopUp />}
       <div>
         <Map
