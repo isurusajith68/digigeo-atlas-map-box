@@ -46,7 +46,9 @@ const SearchPopUp = () => {
         </div>
         <div>
           <div className="flex w-full max-w-[450px] items-center space-x-2 p-2 ">
-            <Input type="search" placeholder="Search" />
+            <Input 
+            
+            type="search" placeholder="Search" />
             <Button type="search">Search</Button>
           </div>
           <div className="flex flex-wrap gap-2 p-2">
