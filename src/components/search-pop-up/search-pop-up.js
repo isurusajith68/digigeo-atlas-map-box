@@ -1,5 +1,11 @@
 import { SearchClick } from "@/store/side-bar-slice";
-import { ArrowDownFromLine, X } from "lucide-react";
+import {
+  ArrowDownFromLine,
+  ChevronDown,
+  ChevronsDown,
+  ChevronsUp,
+  X,
+} from "lucide-react";
 
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
@@ -29,6 +35,7 @@ const SearchPopUp = () => {
   const { isSearchBtnClick, setIsSearchBtnClick } = SearchClick();
   const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
   const [selectRadio, setSelectRadio] = useState("world");
+  const [isCollapsibleOpen, setIsCollapsibleOpen] = useState(false);
 
   return (
     <Draggable className="resize overflow-auto">
@@ -46,14 +53,15 @@ const SearchPopUp = () => {
         </div>
         <div>
           <div className="flex w-full max-w-[450px] items-center space-x-2 p-2 ">
-            <Input 
-            
-            type="search" placeholder="Search" />
+            <Input type="search" placeholder="Search" />
             <Button type="search">Search</Button>
           </div>
           <div className="flex flex-wrap gap-2 p-2">
             <div className="flex-1 ">
-              <Collapsible>
+              <Collapsible
+                open={isCollapsibleOpen}
+                onOpenChange={() => setIsCollapsibleOpen(!isCollapsibleOpen)}
+              >
                 <CollapsibleTrigger className="w-full">
                   <div className="flex items-center gap-10 p-2 border rounded-lg justify-between px-5">
                     <h1 className="text-sm font-medium leading-none ">
@@ -75,7 +83,20 @@ const SearchPopUp = () => {
                         "Layers"
                       )}
                     </h1>
-                    <ArrowDownFromLine size={16} />
+                    {isCollapsibleOpen ? (
+                      <ChevronsUp
+                        onClick={() => {
+                          setIsCollapsibleOpen(!isCollapsibleOpen);
+                        }}
+                        className="shadow-lg"
+                      />
+                    ) : (
+                      <ChevronsDown
+                        onClick={() => {
+                          setIsCollapsibleOpen(!isCollapsibleOpen);
+                        }}
+                      />
+                    )}
                   </div>
                 </CollapsibleTrigger>
                 <CollapsibleContent>
