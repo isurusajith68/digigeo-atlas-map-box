@@ -59,38 +59,62 @@ const SyncPropVectorLayer = () => {
     const f = async (limit, offset) => {
       setSyncPropLoading("loading");
       const response = await fetch(
-        "https://atlas.ceyinfo.cloud/matlas/all_tbl_sync_property_xy",
-        { cache: "no-store" }
+        "https://atlas.ceyinfo.cloud/matlas/all_tbl_sync_property_stream"
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
+      const reader = response.body.getReader();
 
-      const d = await response.json();
+      const processStream = async () => {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) {
+            console.log("Streaming complete");
+            setSyncPropLoading("loaded");
+            break;
+          }
+          try {
+            const decodedValue = new TextDecoder().decode(value);
+            // console.log(decodedValue, "decodedValue");
+            const d = JSON.parse(decodedValue);
+            setCount((pre) => pre + 1);
+            const newFeatures = d.map((item) => ({
+              type: "Feature",
+              geometry: {
+                type: "Point",
+                crs: {
+                  type: "name",
+                  properties: {
+                    name: "EPSG:3857",
+                  },
+                },
+                coordinates: [item.x, item.y],
+              },
+            }));
 
-      console.log(d, "d");
-
-      const newFeatures = d.data.map((item) => ({
-        type: "Feature",
-        geometry: {
-          type: "Point",
-          crs: {
-            type: "name",
-            properties: {
-              name: "EPSG:3857",
-            },
-          },
-          coordinates: [item.x, item.y],
-        },
-        properties:{
-          prop_name:item.prop_name
+            setsyncPropertyFeatures((pre) => ({
+              ...pre,
+              features: [...newFeatures],
+            }));
+          } catch (error) {
+            console.error("Error", error);
+          }
         }
-      }));
-      setSyncPropLoading("loaded");
-      setsyncPropertyFeatures((pre) => ({
-        ...pre,
-        features: newFeatures,
-      }));
+      };
+      processStream();
+
+      // const gj = {
+      //   type: "FeatureCollection",
+      //   crs: {
+      //     type: "name",
+      //     properties: {
+      //       name: "EPSG:3857",
+      //     },
+      //   },
+      //   features: d.data[0].json_build_object.features,
+      // };
+      // setsyncPropertyFeatures(gj);
     };
     f(10662, 0).catch(console.error);
   }, []);
@@ -116,8 +140,6 @@ const SyncPropVectorLayer = () => {
     feature,
     resolution
   ) => {
-    // console.log(feature, "feature");
-    // console.log(resolution, "resolution");
     const colour = "#e8b52a";
 
     let fill = new Fill({

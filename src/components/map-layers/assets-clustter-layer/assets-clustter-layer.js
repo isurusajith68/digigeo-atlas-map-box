@@ -28,7 +28,7 @@ const AssetsClusterLayer = () => {
   }, []);
 
   const assetLoaderFunc = useCallback((extent, resolution, projection) => {
-    const url = `https://atlas.ceyinfo.cloud/matlas/assets_by_no_extent`;
+    const url = `https://atlas.ceyinfo.cloud/matlas/all_tbl_sync_asset_xy`;
     setAssetsLayerLoading("loading");
     fetch(url, {
       method: "GET",
@@ -41,16 +41,36 @@ const AssetsClusterLayer = () => {
     })
       .then((response) => response.json())
       .then((json) => {
-        if (json.data) {
-          if (json.data[0].json_build_object.features) {
-            const features = new GeoJSON().readFeatures(
-              json.data[0].json_build_object
-            );
+        const data = json.data;
+        const newFeatures = data.map((item) => ({
+          type: "Feature",
+          geometry: {
+            type: "Point",
+            crs: {
+              type: "name",
+              properties: {
+                name: "EPSG:3857",
+              },
+            },
+            coordinates: [item.x, item.y],
+          },
+        }));
 
-            assetSourceRef.current.clear();
-            assetSourceRef.current.addFeatures(features);
-          }
-        }
+        const features = {
+          type: "FeatureCollection",
+          crs: {
+            type: "name",
+            properties: {
+              name: "EPSG:3857",
+            },
+          },
+          features: newFeatures,
+        };
+        const geoJsonFormat = new GeoJSON();
+        const olFeatures = geoJsonFormat.readFeatures(features);
+        assetSourceRef.current.clear();
+        assetSourceRef.current.addFeatures(olFeatures);
+
         setAssetsLayerLoading("loaded");
       })
       .catch((error) => {

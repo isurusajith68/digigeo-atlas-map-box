@@ -166,7 +166,7 @@ const LandingMap = () => {
             </olLayerTile>
           )}
 
-          <AreaBoundaryLayer />
+          {/* <AreaBoundaryLayer /> */}
           <ClaimLinkLayer />
           <VectorImageLayer />
 
