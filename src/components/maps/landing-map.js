@@ -31,6 +31,15 @@ import SearchPopUp from "../search-pop-up/search-pop-up";
 import { SearchClick } from "@/store/side-bar-slice";
 import AssetsClusterLayer from "../map-layers/assets-clustter-layer/assets-clustter-layer";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import AssetsClusterSearchLayer from "../map-layers/assets-cluster-search-layer/assets-cluster-search-layer";
+import {
+  useShowAllAssets,
+  useShowAllPropertiesOutlines,
+  useShowAllPropertiesPoints,
+} from "@/store/global-search";
+import SyncPropVectorSearchLayer from "../map-layers/sync-prop-vector-search-layer/sync-prop-vector-search-layer";
+import ClaimLinkSearchLayer from "../claim-link-search-layer/claim-link-search-layer";
+import VectorImageSearchLayer from "../claim-link-search-layer/claim-link-search-layer";
 
 export const format = new MVT();
 
@@ -53,7 +62,9 @@ const LandingMap = () => {
   const { zoom, setZoom } = useMapZoom();
   const { isSearchBtnClick } = SearchClick();
   const [fPropRenderCount, setfPropRenderCount] = useState(0);
-
+  const { showAssets } = useShowAllAssets();
+  const { showPropertiesPoints } = useShowAllPropertiesPoints();
+  const { showPropertiesOutlines } = useShowAllPropertiesOutlines();
   const mapRef = useRef();
   const mapViewRef = useRef();
 
@@ -119,9 +130,6 @@ const LandingMap = () => {
   }, [initialCenter, isCollapsed, selectedMap, zoom]);
 
   const isDes = useMediaQuery("(min-width: 768px)");
-  console.log(isCollapsed, isDes, "isCollapsed, isDes");
-
-  console.log(isCollapsed || isDes);
 
   return (
     <div className="relative">
@@ -166,9 +174,10 @@ const LandingMap = () => {
             </olLayerTile>
           )}
 
-          {/* <AreaBoundaryLayer /> */}
-          <ClaimLinkLayer />
+          <AreaBoundaryLayer />
+          {/* <ClaimLinkLayer /> */}
           <VectorImageLayer />
+          {showPropertiesOutlines && <ClaimLinkSearchLayer />}
 
           {/* <FPropLayer
             mapRef={mapRef}
@@ -176,9 +185,13 @@ const LandingMap = () => {
             setfPropRenderCount={setfPropRenderCount}
           /> */}
 
-          <AssetsClusterLayer />
+          {/* <AssetsClusterLayer /> */}
+          {showAssets && <AssetsClusterSearchLayer />}
           <AssetsLayer />
-          <SyncPropVectorLayer />
+          {/* <SyncPropVectorLayer /> */}
+          {showPropertiesPoints && <SyncPropVectorSearchLayer />}
+
+          {}
         </Map>
       </div>
     </div>

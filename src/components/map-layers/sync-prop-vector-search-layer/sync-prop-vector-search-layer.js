@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { commodityMap_tbl_syncProperty_commodity_VectorLayerStyleFunction } from "./sync-prop-vector-style";
+// import { commodityMap_tbl_syncProperty_commodity_VectorLayerStyleFunction } from "./sync-prop-vector-style";
 import GeoJSON from "ol/format/GeoJSON";
 import { useZustand } from "use-zustand";
 import { useLayerSyncPropLoading } from "@/store/landing-map-slice";
@@ -18,6 +18,7 @@ import {
   Icon,
   Text,
 } from "ol/style";
+import { useShowAllPropertiesPoints } from "@/store/global-search";
 const SyncPropVectorLayer = () => {
   const allSyncPropVectorLayerRef = useRef(null);
   const allSyncPropSourceRef = useRef(null);
@@ -35,10 +36,14 @@ const SyncPropVectorLayer = () => {
     features: [],
   });
   const [count, setCount] = useState(0);
-
+  const showPropertiesPoints = useZustand(
+    useShowAllPropertiesPoints,
+    (state) => state.showPropertiesPoints
+  );
   useEffect(() => {
-    getSyncPropertiesGeometry();
-  }, []);
+    getSyncPropertiesGeometry(showPropertiesPoints);
+  }, [showPropertiesPoints]);
+  // console.log(showPropertiesPoints, "showPropertiesPoints");
 
   const setSyncPropLoading = useZustand(
     useLayerSyncPropLoading,
@@ -55,22 +60,10 @@ const SyncPropVectorLayer = () => {
     (state) => state.propertyLabelVisibility
   );
 
-  const getSyncPropertiesGeometry = useCallback(async () => {
-    const f = async (limit, offset) => {
-      setSyncPropLoading("loading");
-      const response = await fetch(
-        "https://atlas.ceyinfo.cloud/matlas/all_tbl_sync_property_xy",
-        { cache: "no-store" }
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const d = await response.json();
-
-      
-
-      const newFeatures = d.data.map((item) => ({
+  const getSyncPropertiesGeometry = useCallback(
+    async (showPropertiesPoints) => {
+      // console.log(showPropertiesPoints);
+      const newFeatures = showPropertiesPoints?.map((item) => ({
         type: "Feature",
         geometry: {
           type: "Point",
@@ -82,18 +75,19 @@ const SyncPropVectorLayer = () => {
           },
           coordinates: [item.x, item.y],
         },
-        properties:{
-          prop_name:item.prop_name
-        }
+        properties: {
+          prop_name: item.prop_name,
+        },
       }));
+      // console.log(showPropertiesPoints, "showPropertiesPoints");
       setSyncPropLoading("loaded");
       setsyncPropertyFeatures((pre) => ({
         ...pre,
         features: newFeatures,
       }));
-    };
-    f(10662, 0).catch(console.error);
-  }, []);
+    },
+    [showPropertiesPoints]
+  );
 
   useEffect(() => {
     if (syncPropertyFeatures?.features) {
