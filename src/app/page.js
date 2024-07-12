@@ -42,9 +42,9 @@ export default function Home() {
     }
   }, []);
 
-  
   return (
     <div
+      className="max-h-screen overflow-hidden"
       style={{
         minHeight: "calc(100dvh - 64px)",
         minWidth: isCollapsed ? "99.9vw" : "calc(100vw - 260px)",

@@ -9,13 +9,14 @@ import { usePathname } from "next/navigation";
 import { Separator } from "./separator";
 import Legend from "../sidebar/legend/legend";
 import { SearchClick } from "@/store/side-bar-slice";
+import { useSearchTablePopUp } from "@/store/global-search";
 
 export function Nav({ isCollapsed }) {
   const pathname = usePathname();
   // console.log("pathname", pathname);
 
   const { isSearchBtnClick, setIsSearchBtnClick } = SearchClick();
-
+  const { setSearchTablePopUp } = useSearchTablePopUp();
   return (
     <div
       data-collapsed={isCollapsed}
@@ -62,6 +63,7 @@ export function Nav({ isCollapsed }) {
                     className="cursor-pointer "
                     onClick={() => {
                       setIsSearchBtnClick(!isSearchBtnClick);
+                      setSearchTablePopUp(false);
                     }}
                   />
                 </div>

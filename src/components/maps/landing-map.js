@@ -33,13 +33,15 @@ import AssetsClusterLayer from "../map-layers/assets-clustter-layer/assets-clust
 import { useMediaQuery } from "@/hooks/use-media-query";
 import AssetsClusterSearchLayer from "../map-layers/assets-cluster-search-layer/assets-cluster-search-layer";
 import {
+  useSearchTablePopUp,
   useShowAllAssets,
   useShowAllPropertiesOutlines,
   useShowAllPropertiesPoints,
 } from "@/store/global-search";
 import SyncPropVectorSearchLayer from "../map-layers/sync-prop-vector-search-layer/sync-prop-vector-search-layer";
-import ClaimLinkSearchLayer from "../claim-link-search-layer/claim-link-search-layer";
-import VectorImageSearchLayer from "../claim-link-search-layer/claim-link-search-layer";
+import ClaimLinkSearchLayer from "../map-layers/claim-link-search-layer/claim-link-search-layer";
+import VectorImageSearchLayer from "../map-layers/claim-link-search-layer/claim-link-search-layer";
+import TablePopUp from "../search-pop-up/table-pop-up/table-pop-up";
 
 export const format = new MVT();
 
@@ -130,7 +132,7 @@ const LandingMap = () => {
   }, [initialCenter, isCollapsed, selectedMap, zoom]);
 
   const isDes = useMediaQuery("(min-width: 768px)");
-
+  const { searchTablePopUp } = useSearchTablePopUp();
   return (
     <div className="relative">
       <MapControlPanel mapRef={mapRef} mapViewRef={mapViewRef} />
@@ -138,6 +140,7 @@ const LandingMap = () => {
       {(isCollapsed || isDes) && <MapCoordinatesDisplay />}
       {(isCollapsed || isDes) && <MapLayerLoadingSpiner />}
       {isSearchBtnClick && <SearchPopUp />}
+      {searchTablePopUp && <TablePopUp />}
       <div>
         <Map
           onPointermove={onPointerMove}

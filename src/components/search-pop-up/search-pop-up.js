@@ -22,11 +22,14 @@ import Draggable from "react-draggable";
 import { useCallback, useEffect, useState } from "react";
 import {
   useGlobalSearchCompanyId,
+  useSearchTablePopUp,
+  useSearchText,
   useShowAllAssets,
   useShowAllPropertiesOutlines,
   useShowAllPropertiesPoints,
 } from "@/store/global-search";
-import ResultTable from "./result-table";
+import ResultTable from "./table-pop-up/result-table";
+import TablePopUp from "./table-pop-up/table-pop-up";
 
 // const SearchPopUp = () => {
 
@@ -63,14 +66,20 @@ const SearchPopUp = () => {
     useGlobalSearchCompanyId();
   const { setShowAssets } = useShowAllAssets();
 
+  const { searchTablePopUp, setSearchTablePopUp } = useSearchTablePopUp();
+
   // console.log();
   const { showPropertiesPoints, setShowPropertiesPoints } =
     useShowAllPropertiesPoints();
   // console.log(showPropertiesPoints,"showPropertiesPoints");
   const { setShowPropertiesOutlines } = useShowAllPropertiesOutlines();
+
+  const { searchText, setSearchText } = useSearchText();
+  console.log(searchText, "searchText");
   useEffect(() => {
     const handler = setTimeout(() => {
       if (searchInput.length >= 2) {
+        setSearchText(searchInput);
         selectedCheckboxes.includes("Property Point Layer")
           ? fetchPropertyPointLayer()
           : null;
@@ -184,6 +193,11 @@ const SearchPopUp = () => {
     setShowAssets(data.data);
   }, [searchInput]);
 
+  const showTablePopUp = () => {
+    setSearchTablePopUp(!searchTablePopUp);
+    setIsSearchBtnClick(!isSearchBtnClick);
+  };
+
   return (
     <Draggable className="resize overflow-auto">
       <div className="absolute flex top-2 left-20 z-10 bg-background ring ring-gray-500 shadow-sm text-foreground  rounded-lg  w-[500px] flex-col  min-w-[700px] min-h-[320px] ">
@@ -206,6 +220,7 @@ const SearchPopUp = () => {
                 placeholder="Search"
                 onChange={(e) => {
                   setSearchInput(e.target.value);
+                  // setSearchText(e.target.value);
                   // setPropertyOutLineList([]);
                   // setPropertyPointList([]);
                   // setAssetsList([]);
@@ -558,9 +573,13 @@ const SearchPopUp = () => {
                 </div>
               </RadioGroup>
             </div>
+            {resultTable && (
+              <Button onClick={() => showTablePopUp()} className="bg-red-500">
+                View Table
+              </Button>
+            )}
           </div>
         </div>
-        <div className="flex justify-center mt-2">{resultTable && <ResultTable />}</div>
       </div>
     </Draggable>
   );

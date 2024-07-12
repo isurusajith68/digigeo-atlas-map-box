@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { bbox } from "ol/loadingstrategy";
 import GeoJSON from "ol/format/GeoJSON";
-import { map_tbl_sync_claimlink_VectorLayerStyleFunction } from "../map-layers/claim-link-vector-layer/claim-link-style";
+import { map_tbl_sync_claimlink_VectorLayerStyleFunction } from "../claim-link-vector-layer/claim-link-style";
 import { useLayerVectorClaimLinkLoading } from "@/store/landing-map-slice";
 import { useZustand } from "use-zustand";
 import { useClaimLinkLayerVisibility } from "@/store/layer-slice";
@@ -71,10 +71,10 @@ const ClaimLinkSearchLayer = () => {
         claimLinkSourceRef.current.clear();
         claimLinkSourceRef.current.addFeatures(features);
       }
-      console.log(
-        showPropertiesOutlines[0].json_build_object.features,
-        "showPropertiesOutlines"
-      );
+      // console.log(
+      //   showPropertiesOutlines[0].json_build_object.features,
+      //   "showPropertiesOutlines"
+      // );
       //console.log("hit claims3")
 
       //console.log("bbsync uni tbl01_claims   features count", features.count);
