@@ -12,7 +12,9 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableCell2,
   TableHead,
+  TableHead2,
   TableHeader,
   TableRow,
 } from "../../../ui/table";
@@ -139,7 +141,7 @@ const AssetsTable = ({ data }) => {
                 <TableHead> state_prov </TableHead>
                 <TableHead> country</TableHead>
                 <TableHead>region </TableHead>
-                <TableHead>accuracy </TableHead>
+                <TableHead2>accuracy </TableHead2>
                 <TableHead>owners </TableHead>
                 <TableHead>property </TableHead>
                 <TableHead>latitude </TableHead>
@@ -162,7 +164,7 @@ const AssetsTable = ({ data }) => {
                     <TableCell>{data.state_prov}</TableCell>
                     <TableCell>{data.country}</TableCell>
                     <TableCell>{data.region}</TableCell>
-                    <TableCell>{data.accuracy}</TableCell>
+                    <TableCell2>{data.accuracy}</TableCell2>
                     <TableCell>{data.owners}</TableCell>
                     <TableCell>{data.property}</TableCell>
                     <TableCell>{data.latitude}</TableCell>

@@ -24,6 +24,7 @@ import {
   useGlobalSearchCompanyId,
   useSearchTablePopUp,
   useSearchText,
+  useSelectedCheckboxes,
   useShowAllAssets,
   useShowAllPropertiesOutlines,
   useShowAllPropertiesPoints,
@@ -44,11 +45,11 @@ import TablePopUp from "./table-pop-up/table-pop-up";
 // }
 const SearchPopUp = () => {
   const { isSearchBtnClick, setIsSearchBtnClick } = SearchClick();
-  const [selectedCheckboxes, setSelectedCheckboxes] = useState([
-    "Property Point Layer",
-    "Property OutLine Layer",
-    "Assets layer",
-  ]);
+  // const [selectedCheckboxes, setSelectedCheckboxes] = useState([
+  //   "Property Point Layer",
+  //   "Property OutLine Layer",
+  //   "Assets layer",
+  // ]);
   const [selectRadio, setSelectRadio] = useState("world");
   const [isCollapsibleOpen, setIsCollapsibleOpen] = useState(false);
   const [propertyPointList, setPropertyPointList] = useState([]);
@@ -58,6 +59,9 @@ const SearchPopUp = () => {
   const [hasFocus, setHasFocus] = useState(true);
   const [assetsSearchLoading, setAssetsSearchLoading] = useState(true);
   const [resultTable, setResultTable] = useState(false);
+
+  const { selectedCheckboxes, setSelectedCheckboxes } = useSelectedCheckboxes();
+
   const [propertyPointSearchLoading, setPropertyPointSearchLoading] =
     useState(true);
   const [propertyOutLineSearchLoading, setPropertyOutLineSearchLoading] =
@@ -197,6 +201,13 @@ const SearchPopUp = () => {
     setSearchTablePopUp(!searchTablePopUp);
     setIsSearchBtnClick(!isSearchBtnClick);
   };
+  const handleMouseDown = (event) => {
+    event.stopPropagation();
+  };
+
+  useEffect(() => {
+    selectRadio === "b-box" ? setIsSearchBtnClick(!isSearchBtnClick) : null;
+  }, [isSearchBtnClick, selectRadio, setIsSearchBtnClick]);
 
   return (
     <Draggable className="resize overflow-auto">
@@ -212,7 +223,7 @@ const SearchPopUp = () => {
             />
           </div>
         </div>
-        <div className="w-full flex flex-col">
+        <div onMouseDown={handleMouseDown} className="w-full flex flex-col">
           <div className="flex p-4 gap-2 w-full">
             <div className="relative  w-full">
               <Input
@@ -574,7 +585,10 @@ const SearchPopUp = () => {
               </RadioGroup>
             </div>
             {resultTable && (
-              <Button onClick={() => showTablePopUp()} className="bg-red-500">
+              <Button
+                onClick={() => showTablePopUp()}
+                className="bg-red-500 text-white "
+              >
                 View Table
               </Button>
             )}

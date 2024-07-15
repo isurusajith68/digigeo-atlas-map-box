@@ -2,6 +2,7 @@ import {
   useClickAssetTab,
   useClickClaimLinkTab,
   useClickPropertyTab,
+  useSelectedCheckboxes,
   useShowAllAssets,
   useShowAllPropertiesOutlines,
   useShowAllPropertiesPoints,
@@ -10,44 +11,72 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../ui/tabs";
 import SyncPropTable from "./table/sync-prop-table";
 import AssetsTable from "./table/assets-table";
 import SyncClaimLinkTable from "./table/sync-claim-link-table";
+import { useEffect } from "react";
 const ResultTable = ({ syncPropData, assetData, syncClaimLinkData }) => {
   const { setClickPropertyTab } = useClickPropertyTab();
   const { setClickAssetTab } = useClickAssetTab();
   const { setClickClaimLinkTab } = useClickClaimLinkTab();
+  const { selectedCheckboxes } = useSelectedCheckboxes();
+
+  useEffect(() => {
+    selectedCheckboxes.includes("Property Point Layer")
+      ? setClickPropertyTab(true)
+      : selectedCheckboxes.includes("Assets layer")
+      ? setClickAssetTab(true)
+      : selectedCheckboxes.includes("Property OutLine Layer")
+      ? setClickClaimLinkTab(true)
+      : "";
+  }, [selectedCheckboxes]);
 
   return (
-    <Tabs defaultValue="pp">
+    <Tabs
+      defaultValue={
+        selectedCheckboxes.includes("Property Point Layer")
+          ? "pp"
+          : selectedCheckboxes.includes("Assets layer")
+          ? "a"
+          : selectedCheckboxes.includes("Property OutLine Layer")
+          ? "po"
+          : ""
+      }
+    >
       <TabsList className="gap-20">
-        <TabsTrigger
-          value="pp"
-          onClick={() => {
-            setClickPropertyTab(true);
-            setClickAssetTab(false);
-            setClickClaimLinkTab(false);
-          }}
-        >
-          Property Points
-        </TabsTrigger>
-        <TabsTrigger
-          value="a"
-          onClick={() => {
-            setClickPropertyTab(false);
-            setClickAssetTab(true);
-            setClickClaimLinkTab(false);
-          }}
-        >
-          Assets
-        </TabsTrigger>
-        <TabsTrigger
-          value="po"
-          onClick={() => {
-            setClickPropertyTab(false);
-            setClickAssetTab(false);
-            setClickClaimLinkTab(true);
-          }}
-        >
-          Property Outline
-        </TabsTrigger>
+        {selectedCheckboxes.includes("Property Point Layer") && (
+          <TabsTrigger
+            value="pp"
+            onClick={() => {
+              setClickPropertyTab(true);
+              setClickAssetTab(false);
+              setClickClaimLinkTab(false);
+            }}
+          >
+            Property Points
+          </TabsTrigger>
+        )}
+        {selectedCheckboxes.includes("Assets layer") && (
+          <TabsTrigger
+            value="a"
+            onClick={() => {
+              setClickPropertyTab(false);
+              setClickAssetTab(true);
+              setClickClaimLinkTab(false);
+            }}
+          >
+            Assets
+          </TabsTrigger>
+        )}
+        {selectedCheckboxes.includes("Property OutLine Layer") && (
+          <TabsTrigger
+            value="po"
+            onClick={() => {
+              setClickPropertyTab(false);
+              setClickAssetTab(false);
+              setClickClaimLinkTab(true);
+            }}
+          >
+            Property Outline
+          </TabsTrigger>
+        )}
       </TabsList>
       <TabsContent value="pp" className="h-[400px]  w-[950px]">
         <div>

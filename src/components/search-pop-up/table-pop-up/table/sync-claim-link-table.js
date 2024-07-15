@@ -12,7 +12,9 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableCell2,
   TableHead,
+  TableHead2,
   TableHeader,
   TableRow,
 } from "../../../ui/table";
@@ -130,11 +132,11 @@ const SyncClaimLinkTable = ({ data }) => {
                 <TableHead>propno</TableHead>
                 <TableHead>prop_name</TableHead>
                 <TableHead>prop_alias</TableHead>
-                <TableHead>owners</TableHead>
+                <TableHead2>owners</TableHead2>
                 <TableHead>state_prov</TableHead>
                 <TableHead>country</TableHead>
-                <TableHead className="w-[350px]">region</TableHead>
-                <TableHead className="w-[150px]">prop_url </TableHead>
+                <TableHead >region</TableHead>
+                <TableHead>prop_url </TableHead>
                 <TableHead>status </TableHead>
                 <TableHead> map_area</TableHead>
                 <TableHead>area_ha </TableHead>
@@ -149,7 +151,7 @@ const SyncClaimLinkTable = ({ data }) => {
                     <TableCell>{data.propno}</TableCell>
                     <TableCell>{data.prop_name}</TableCell>
                     <TableCell>{data.prop_alias}</TableCell>
-                    <TableCell>{data.owners}</TableCell>
+                    <TableCell2>{data.owners}</TableCell2>
                     <TableCell>{data.state_prov}</TableCell>
                     <TableCell>{data.country}</TableCell>
                     <TableCell>{data.region}</TableCell>

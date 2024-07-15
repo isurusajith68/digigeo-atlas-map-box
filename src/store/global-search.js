@@ -6,6 +6,15 @@ export const useGlobalSearchCompanyId = create((set) => ({
     set({ globalSearchCompanyId }),
 }));
 
+export const useSelectedCheckboxes = create((set) => ({
+  selectedCheckboxes: [
+    "Property Point Layer",
+    "Property OutLine Layer",
+    "Assets layer",
+  ],
+  setSelectedCheckboxes: (selectedCheckboxes) => set({ selectedCheckboxes }),
+}));
+
 export const useShowAllAssets = create((set) => ({
   showAssets: null,
   setShowAssets: (showAssets) => set({ showAssets }),
@@ -63,4 +72,10 @@ export const useLoadingClaimLinkTable = create((set) => ({
   loadingClaimLinkTable: false,
   setLoadingClaimLinkTable: (loadingClaimLinkTable) =>
     set({ loadingClaimLinkTable }),
+}));
+
+export const useMinimizeSearchTablePopUp = create((set) => ({
+  minimizeSearchTablePopUp: false,
+  setMinimizeSearchTablePopUp: (minimizeSearchTablePopUp) =>
+    set({ minimizeSearchTablePopUp }),
 }));

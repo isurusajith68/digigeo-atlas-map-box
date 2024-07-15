@@ -42,6 +42,8 @@ import SyncPropVectorSearchLayer from "../map-layers/sync-prop-vector-search-lay
 import ClaimLinkSearchLayer from "../map-layers/claim-link-search-layer/claim-link-search-layer";
 import VectorImageSearchLayer from "../map-layers/claim-link-search-layer/claim-link-search-layer";
 import TablePopUp from "../search-pop-up/table-pop-up/table-pop-up";
+import BBoxInstruction from "../map-layers/pop-up/b-box/b-box-instruction";
+import DrawShapes from "../map-layers/draw-shapes/draw-shapes";
 
 export const format = new MVT();
 
@@ -141,6 +143,7 @@ const LandingMap = () => {
       {(isCollapsed || isDes) && <MapLayerLoadingSpiner />}
       {isSearchBtnClick && <SearchPopUp />}
       {searchTablePopUp && <TablePopUp />}
+      {/* <BBoxInstruction /> */}
       <div>
         <Map
           onPointermove={onPointerMove}
@@ -193,7 +196,7 @@ const LandingMap = () => {
           <AssetsLayer />
           {/* <SyncPropVectorLayer /> */}
           {showPropertiesPoints && <SyncPropVectorSearchLayer />}
-
+          <DrawShapes />
           {}
         </Map>
       </div>

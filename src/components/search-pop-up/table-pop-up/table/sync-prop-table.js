@@ -12,7 +12,9 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableCell2,
   TableHead,
+  TableHead2,
   TableHeader,
   TableRow,
 } from "../../../ui/table";
@@ -125,7 +127,7 @@ const SyncPropTable = ({ data }) => {
   return (
     <>
       <div className=" flex overflow-auto w-[940px] ">
-        <div className="h-[338px]  ">
+        <div className="h-[340px]  ">
           {" "}
           <Table className="">
             <TableHeader>
@@ -138,7 +140,7 @@ const SyncPropTable = ({ data }) => {
 
                 <TableHead>prop_alias</TableHead>
                 <TableHead>min_belt</TableHead>
-                <TableHead>owners </TableHead>
+                <TableHead2>owners </TableHead2>
                 <TableHead> prop_loc </TableHead>
                 <TableHead> area</TableHead>
                 <TableHead>state_prov </TableHead>
@@ -161,7 +163,7 @@ const SyncPropTable = ({ data }) => {
                     <TableCell>{data.prop_alias}</TableCell>
                     <TableCell>{data.prop_alias}</TableCell>
                     <TableCell>{data.min_belt}</TableCell>
-                    <TableCell>{data.owners}</TableCell>
+                    <TableCell2>{data.owners}</TableCell2>
                     <TableCell>{data.prop_loc}</TableCell>
                     <TableCell>{data.area}</TableCell>
                     <TableCell>{data.state_prov}</TableCell>

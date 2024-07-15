@@ -1,4 +1,4 @@
-import { Minus, X } from "lucide-react";
+import { Maximize, Minus, X } from "lucide-react";
 import Draggable from "react-draggable";
 import ResultTable from "./result-table";
 import {
@@ -8,6 +8,7 @@ import {
   useLoadingAssetTable,
   useLoadingClaimLinkTable,
   useLoadingPropertyTable,
+  useMinimizeSearchTablePopUp,
   useSearchTablePopUp,
   useSearchText,
 } from "@/store/global-search";
@@ -20,6 +21,8 @@ const TablePopUp = () => {
   const [assetData, setAssetData] = useState([]);
   const [syncClaimLinkData, setSyncClaimLinkData] = useState([]);
   const { searchTablePopUp, setSearchTablePopUp } = useSearchTablePopUp();
+  const { minimizeSearchTablePopUp, setMinimizeSearchTablePopUp } =
+    useMinimizeSearchTablePopUp();
 
   const { clickPropertyTab } = useClickPropertyTab();
   const { clickAssetTab } = useClickAssetTab();
@@ -84,38 +87,78 @@ const TablePopUp = () => {
       setLoadingClaimLinkTable(false);
     }
   };
-
+  const handleMouseDown = (event) => {
+    event.stopPropagation();
+  };
   return (
-    <Draggable className="resize overflow-auto">
-      <div className="absolute flex top-2 left-20 z-10 bg-background ring ring-gray-500 shadow-sm text-foreground  rounded-lg  w-[500px] flex-col  min-w-[1000px] min-h-[320px] ">
-        <div className="flex justify-between w-full border-b p-2 bg-slate-400 read-only rounded-t-lg">
-          <div className="flex items-center ">
-            <h1 className="font-semibold text-white">
-              Search Table{" "}
-              <span className="text-gray-300 ml-1">({searchText})</span>
-            </h1>
+    <>
+      {minimizeSearchTablePopUp ? (
+        <Draggable className="resize overflow-auto" axis="none">
+          <div
+            className={`absolute flex top-3 left-20 z-10 bg-background ring ring-gray-500 shadow-sm text-foreground  rounded-lg  w-[250px] flex-col  min-w-[250px] min-h-[70px] `}
+          >
+            <div className="flex justify-between w-full border-b p-2 bg-slate-400 read-only rounded-t-lg">
+              <div className="flex items-center ">
+                <h1 className="font-semibold text-white text-xs">
+                  Search Table{" "}
+                  <span className="text-gray-300 ml-1">({searchText})</span>
+                </h1>
+              </div>
+              <div className="flex items-center justify-center  gap-3">
+                <Maximize
+                  className="cursor-pointer text-white h-5 w-5"
+                  onClick={() => setMinimizeSearchTablePopUp(false)}
+                />
+                <X
+                  className="cursor-pointer text-white h-5 w-5"
+                  onClick={() => setSearchTablePopUp(!searchTablePopUp)}
+                />
+              </div>
+            </div>
+            <div
+              onMouseDown={handleMouseDown}
+              className="flex w-full  mt-2 ml-10"
+            ></div>
           </div>
-          <div className="flex items-center justify-center  gap-3">
-            <Minus
-              className="cursor-pointer text-white h-5 w-5"
+        </Draggable>
+      ) : (
+        <Draggable className="resize overflow-auto">
+          <div
+            className={`absolute flex top-10 left-20 z-10 bg-background ring ring-gray-500 shadow-sm text-foreground  rounded-lg  w-[500px] flex-col  min-w-[1000px] min-h-[320px] `}
+          >
+            <div className="flex justify-between w-full border-b p-2 bg-slate-400 read-only rounded-t-lg">
+              <div className="flex items-center ">
+                <h1 className="font-semibold text-white">
+                  Search Table{" "}
+                  <span className="text-gray-300 ml-1">({searchText})</span>
+                </h1>
+              </div>
+              <div className="flex items-center justify-center  gap-3">
+                <Minus
+                  className="cursor-pointer text-white h-5 w-5"
+                  onClick={() => setMinimizeSearchTablePopUp(true)}
+                />
 
-              //   onClick={() => setSearchTablePopUp(!searchTablePopUp)}
-            />
-            <X
-              className="cursor-pointer text-white h-5 w-5"
-              onClick={() => setSearchTablePopUp(!searchTablePopUp)}
-            />
+                <X
+                  className="cursor-pointer text-white h-5 w-5"
+                  onClick={() => setSearchTablePopUp(!searchTablePopUp)}
+                />
+              </div>
+            </div>
+            <div
+              onMouseDown={handleMouseDown}
+              className="flex w-full  mt-2 ml-10"
+            >
+              <ResultTable
+                syncPropData={syncPropData}
+                assetData={assetData}
+                syncClaimLinkData={syncClaimLinkData}
+              />
+            </div>
           </div>
-        </div>
-        <div className="flex w-full  mt-2 ml-10">
-          <ResultTable
-            syncPropData={syncPropData}
-            assetData={assetData}
-            syncClaimLinkData={syncClaimLinkData}
-          />
-        </div>
-      </div>
-    </Draggable>
+        </Draggable>
+      )}
+    </>
   );
 };
 export default TablePopUp;
