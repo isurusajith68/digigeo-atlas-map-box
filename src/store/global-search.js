@@ -15,6 +15,16 @@ export const useSelectedCheckboxes = create((set) => ({
   setSelectedCheckboxes: (selectedCheckboxes) => set({ selectedCheckboxes }),
 }));
 
+export const useSelectedRadio = create((set) => ({
+  selectRadio: "world",
+  setSelectRadio: (selectRadio) => set({ selectRadio }),
+}));
+
+export const useIsCollapsibleOpen = create((set) => ({
+  isCollapsibleOpen: false,
+  setIsCollapsibleOpen: (isCollapsibleOpen) => set({ isCollapsibleOpen }),
+}));
+
 export const useShowAllAssets = create((set) => ({
   showAssets: null,
   setShowAssets: (showAssets) => set({ showAssets }),
@@ -40,6 +50,11 @@ export const useSearchTablePopUp = create((set) => ({
 export const useSearchText = create((set) => ({
   searchText: "",
   setSearchText: (searchText) => set({ searchText }),
+}));
+
+export const useSearchInput = create((set) => ({
+  searchInput: "",
+  setSearchInput: (searchInput) => set({ searchInput }),
 }));
 
 export const useClickPropertyTab = create((set) => ({
@@ -78,4 +93,19 @@ export const useMinimizeSearchTablePopUp = create((set) => ({
   minimizeSearchTablePopUp: false,
   setMinimizeSearchTablePopUp: (minimizeSearchTablePopUp) =>
     set({ minimizeSearchTablePopUp }),
+}));
+
+export const useSearchPopupMinimize = create((set) => ({
+  searchPopupMinimize: false,
+  setSearchPopupMinimize: (searchPopupMinimize) => set({ searchPopupMinimize }),
+}));
+
+export const useShowBoundingBox = create((set) => ({
+  showBoundingBox: false,
+  setShowBoundingBox: (showBoundingBox) => set({ showBoundingBox }),
+}));
+
+export const useBoundaryBoxDrawEnd = create((set) => ({
+  boundaryBoxDrawEnd: false,
+  setBoundaryBoxDrawEnd: (boundaryBoxDrawEnd) => set({ boundaryBoxDrawEnd }),
 }));

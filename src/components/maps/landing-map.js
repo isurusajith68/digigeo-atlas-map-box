@@ -15,11 +15,9 @@ import { toLonLat } from "ol/proj";
 import MapControlPanel from "../map-controllers/map-view-control-panel";
 import MapLayerControlPanel from "../map-controllers/map-layer-control-panel";
 import MapCoordinatesDisplay from "../map-controllers/map-coordinates-display";
-import FPropLayer from "../map-layers/featured-props/f-prop-layer";
 import { useState } from "react";
 import AreaBoundaryLayer from "../map-layers/area-boundary/area-boundary-layer";
 import MapLayerLoadingSpiner from "../map-controllers/map-layer-loading-toast";
-import { useFeaturedLayerVisibility } from "@/store/layer-slice";
 import VectorImageLayer from "../map-layers/claim-vector-image-layer/vector-image-layer";
 import AssetsLayer from "../map-layers/assets-layer/assets-layer";
 import SyncPropVectorLayer from "../map-layers/sync-prop-vector-layer/sync-prop-vector-layer";
@@ -28,7 +26,7 @@ import MVT from "ol/format/MVT";
 import { createMapboxStreetsV6Style } from "./maps-style";
 import { Fill, Icon, Stroke, Style, Text } from "ol/style";
 import SearchPopUp from "../search-pop-up/search-pop-up";
-import { SearchClick } from "@/store/side-bar-slice";
+import { useSearchClick } from "@/store/side-bar-slice";
 import AssetsClusterLayer from "../map-layers/assets-clustter-layer/assets-clustter-layer";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import AssetsClusterSearchLayer from "../map-layers/assets-cluster-search-layer/assets-cluster-search-layer";
@@ -37,13 +35,14 @@ import {
   useShowAllAssets,
   useShowAllPropertiesOutlines,
   useShowAllPropertiesPoints,
+  useShowBoundingBox,
 } from "@/store/global-search";
 import SyncPropVectorSearchLayer from "../map-layers/sync-prop-vector-search-layer/sync-prop-vector-search-layer";
 import ClaimLinkSearchLayer from "../map-layers/claim-link-search-layer/claim-link-search-layer";
-import VectorImageSearchLayer from "../map-layers/claim-link-search-layer/claim-link-search-layer";
 import TablePopUp from "../search-pop-up/table-pop-up/table-pop-up";
 import BBoxInstruction from "../map-layers/pop-up/b-box/b-box-instruction";
-import DrawShapes from "../map-layers/draw-shapes/draw-shapes";
+import DrawBoundingBox from "../map-layers/draw-bounding-box/draw-bounding-box";
+
 
 export const format = new MVT();
 
@@ -64,13 +63,14 @@ const LandingMap = () => {
   const { initialCenter, setInitialCenter } = useInitialCenter();
   const { setlong, setlat } = useLatLong();
   const { zoom, setZoom } = useMapZoom();
-  const { isSearchBtnClick } = SearchClick();
+  const { isSearchBtnClick } = useSearchClick();
   const [fPropRenderCount, setfPropRenderCount] = useState(0);
   const { showAssets } = useShowAllAssets();
   const { showPropertiesPoints } = useShowAllPropertiesPoints();
   const { showPropertiesOutlines } = useShowAllPropertiesOutlines();
   const mapRef = useRef();
   const mapViewRef = useRef();
+  const [vectorSource, setVectorSource] = useState();
 
   function inchesPreUnit(unit) {
     return METERS_PER_UNIT[unit] * INCHES_PER_METRE;
@@ -135,6 +135,8 @@ const LandingMap = () => {
 
   const isDes = useMediaQuery("(min-width: 768px)");
   const { searchTablePopUp } = useSearchTablePopUp();
+  const { showBoundingBox } = useShowBoundingBox();
+
   return (
     <div className="relative">
       <MapControlPanel mapRef={mapRef} mapViewRef={mapViewRef} />
@@ -146,7 +148,7 @@ const LandingMap = () => {
       {/* <BBoxInstruction /> */}
       <div>
         <Map
-          onPointermove={onPointerMove}
+          onPointermove={showBoundingBox ? null : onPointerMove}
           ref={mapRef}
           style={{ height: "calc(100dvh - 64px)" }}
         >
@@ -158,15 +160,6 @@ const LandingMap = () => {
             ref={mapViewRef}
             zoom={zoom}
           />
-          {/* {selectedMap === "m" && (
-            <olLayerVectorTile declutter style={style} preload={Infinity}>
-              <olSourceVectorTile
-                // attributions={attributions}
-                format={format}
-                url={`https://{a-d}.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6/{z}/{x}/{y}.vector.pbf?access_token=${key}`}
-              />
-            </olLayerVectorTile>
-          )} */}
 
           {(selectedMap === "m" ||
             selectedMap === "s" ||
@@ -196,8 +189,7 @@ const LandingMap = () => {
           <AssetsLayer />
           {/* <SyncPropVectorLayer /> */}
           {showPropertiesPoints && <SyncPropVectorSearchLayer />}
-          <DrawShapes />
-          {}
+          {showBoundingBox && <DrawBoundingBox  />}
         </Map>
       </div>
     </div>

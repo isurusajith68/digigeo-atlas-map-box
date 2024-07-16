@@ -1,22 +1,16 @@
 "use client";
-
-import Link from "next/link";
 import { Info, Map, Search, WorkflowIcon } from "lucide-react";
-
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
-import { usePathname } from "next/navigation";
 import { Separator } from "./separator";
 import Legend from "../sidebar/legend/legend";
-import { SearchClick } from "@/store/side-bar-slice";
+import { useSearchClick } from "@/store/side-bar-slice";
 import { useSearchTablePopUp } from "@/store/global-search";
 
 export function Nav({ isCollapsed }) {
-  const pathname = usePathname();
-  // console.log("pathname", pathname);
-
-  const { isSearchBtnClick, setIsSearchBtnClick } = SearchClick();
+  const { isSearchBtnClick, setIsSearchBtnClick } = useSearchClick();
   const { setSearchTablePopUp } = useSearchTablePopUp();
+
+
+
   return (
     <div
       data-collapsed={isCollapsed}

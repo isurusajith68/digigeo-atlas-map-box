@@ -2,6 +2,7 @@ import {
   useClickAssetTab,
   useClickClaimLinkTab,
   useClickPropertyTab,
+  useMinimizeSearchTablePopUp,
   useSelectedCheckboxes,
   useShowAllAssets,
   useShowAllPropertiesOutlines,
@@ -17,7 +18,7 @@ const ResultTable = ({ syncPropData, assetData, syncClaimLinkData }) => {
   const { setClickAssetTab } = useClickAssetTab();
   const { setClickClaimLinkTab } = useClickClaimLinkTab();
   const { selectedCheckboxes } = useSelectedCheckboxes();
-
+  const { minimizeSearchTablePopUp } = useMinimizeSearchTablePopUp();
   useEffect(() => {
     selectedCheckboxes.includes("Property Point Layer")
       ? setClickPropertyTab(true)
@@ -78,17 +79,17 @@ const ResultTable = ({ syncPropData, assetData, syncClaimLinkData }) => {
           </TabsTrigger>
         )}
       </TabsList>
-      <TabsContent value="pp" className="h-[400px]  w-[950px]">
+      <TabsContent value="pp" className="h-[400px]  w-[950px]   ">
         <div>
           <SyncPropTable data={syncPropData} />
         </div>
       </TabsContent>
-      <TabsContent value="a" className="h-[400px]  w-[950px]">
+      <TabsContent value="a" className="h-[400px]  w-[950px]   ">
         <div>
           <AssetsTable data={assetData} />
         </div>
       </TabsContent>
-      <TabsContent value="po" className="h-[400px]  w-[950px]">
+      <TabsContent value="po" className="h-[400px]  w-[950px]   ">
         {" "}
         <div>
           <SyncClaimLinkTable data={syncClaimLinkData} />

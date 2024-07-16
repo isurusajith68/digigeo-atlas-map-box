@@ -13,6 +13,7 @@ import {
   useSearchText,
 } from "@/store/global-search";
 import { useEffect, useState } from "react";
+import MinimizeTablePopup from "@/components/minimize-popups/minimize-result-table-popup";
 
 const TablePopUp = () => {
   const { searchText } = useSearchText();
@@ -93,38 +94,11 @@ const TablePopUp = () => {
   return (
     <>
       {minimizeSearchTablePopUp ? (
-        <Draggable className="resize overflow-auto" axis="none">
-          <div
-            className={`absolute flex top-3 left-20 z-10 bg-background ring ring-gray-500 shadow-sm text-foreground  rounded-lg  w-[250px] flex-col  min-w-[250px] min-h-[70px] `}
-          >
-            <div className="flex justify-between w-full border-b p-2 bg-slate-400 read-only rounded-t-lg">
-              <div className="flex items-center ">
-                <h1 className="font-semibold text-white text-xs">
-                  Search Table{" "}
-                  <span className="text-gray-300 ml-1">({searchText})</span>
-                </h1>
-              </div>
-              <div className="flex items-center justify-center  gap-3">
-                <Maximize
-                  className="cursor-pointer text-white h-5 w-5"
-                  onClick={() => setMinimizeSearchTablePopUp(false)}
-                />
-                <X
-                  className="cursor-pointer text-white h-5 w-5"
-                  onClick={() => setSearchTablePopUp(!searchTablePopUp)}
-                />
-              </div>
-            </div>
-            <div
-              onMouseDown={handleMouseDown}
-              className="flex w-full  mt-2 ml-10"
-            ></div>
-          </div>
-        </Draggable>
+        <MinimizeTablePopup />
       ) : (
         <Draggable className="resize overflow-auto">
           <div
-            className={`absolute flex top-10 left-20 z-10 bg-background ring ring-gray-500 shadow-sm text-foreground  rounded-lg  w-[500px] flex-col  min-w-[1000px] min-h-[320px] `}
+            className={`absolute flex top-20 left-40 z-10 bg-background ring ring-gray-500 shadow-sm text-foreground  rounded-lg  w-[500px] flex-col  min-w-[1000px] min-h-[320px] `}
           >
             <div className="flex justify-between w-full border-b p-2 bg-slate-400 read-only rounded-t-lg">
               <div className="flex items-center ">
