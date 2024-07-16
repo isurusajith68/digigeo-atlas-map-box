@@ -124,7 +124,7 @@ const SyncClaimLinkTable = ({ data }) => {
     <>
       <div className=" flex overflow-auto w-[940px] ">
         {" "}
-        <div className="h-[338px]">
+        <div className="h-[280px]">
           {" "}
           <Table className="">
             <TableHeader>
@@ -135,7 +135,7 @@ const SyncClaimLinkTable = ({ data }) => {
                 <TableHead2>owners</TableHead2>
                 <TableHead>state_prov</TableHead>
                 <TableHead>country</TableHead>
-                <TableHead >region</TableHead>
+                <TableHead>region</TableHead>
                 <TableHead>prop_url </TableHead>
                 <TableHead>status </TableHead>
                 <TableHead> map_area</TableHead>

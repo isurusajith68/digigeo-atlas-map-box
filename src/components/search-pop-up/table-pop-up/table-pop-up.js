@@ -98,7 +98,7 @@ const TablePopUp = () => {
       ) : (
         <Draggable className="resize overflow-auto">
           <div
-            className={`absolute flex top-20 left-40 z-10 bg-background ring ring-gray-500 shadow-sm text-foreground  rounded-lg  w-[500px] flex-col  min-w-[1000px] min-h-[320px] `}
+            className={`absolute flex top-24 left-40 z-10 bg-background ring ring-gray-500 shadow-sm text-foreground  rounded-lg  w-[500px] flex-col  min-w-[1000px] min-h-[320px] `}
           >
             <div className="flex justify-between w-full border-b p-2 bg-slate-400 read-only rounded-t-lg">
               <div className="flex items-center ">

@@ -127,7 +127,7 @@ const SyncPropTable = ({ data }) => {
   return (
     <>
       <div className=" flex overflow-auto w-[940px] ">
-        <div className="h-[340px]  ">
+        <div className="h-[280px]  ">
           {" "}
           <Table className="">
             <TableHeader>

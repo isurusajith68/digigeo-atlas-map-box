@@ -124,7 +124,7 @@ const AssetsTable = ({ data }) => {
     <>
       {" "}
       <div className=" flex overflow-auto w-[940px] ">
-        <div className="h-[338px]">
+        <div className="h-[280px]">
           {" "}
           <Table className="">
             <TableHeader>

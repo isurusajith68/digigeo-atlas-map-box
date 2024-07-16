@@ -79,17 +79,17 @@ const ResultTable = ({ syncPropData, assetData, syncClaimLinkData }) => {
           </TabsTrigger>
         )}
       </TabsList>
-      <TabsContent value="pp" className="h-[400px]  w-[950px]   ">
+      <TabsContent value="pp" className="h-[340px]  w-[950px]   ">
         <div>
           <SyncPropTable data={syncPropData} />
         </div>
       </TabsContent>
-      <TabsContent value="a" className="h-[400px]  w-[950px]   ">
+      <TabsContent value="a" className="h-[340px]  w-[950px]   ">
         <div>
           <AssetsTable data={assetData} />
         </div>
       </TabsContent>
-      <TabsContent value="po" className="h-[400px]  w-[950px]   ">
+      <TabsContent value="po" className="h-[340px]  w-[950px]   ">
         {" "}
         <div>
           <SyncClaimLinkTable data={syncClaimLinkData} />
