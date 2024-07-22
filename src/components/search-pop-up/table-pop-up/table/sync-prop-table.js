@@ -132,24 +132,21 @@ const SyncPropTable = ({ data }) => {
           <Table className="">
             <TableHeader>
               <TableRow className="">
-                <TableHead>propno</TableHead>
-                <TableHead>propertyid</TableHead>
-                <TableHead>prop_name</TableHead>
-                <TableHead>prop_alias</TableHead>
-                <TableHead>prop_alias</TableHead>
-
-                <TableHead>prop_alias</TableHead>
-                <TableHead>min_belt</TableHead>
-                <TableHead2>owners </TableHead2>
-                <TableHead> prop_loc </TableHead>
-                <TableHead> area</TableHead>
-                <TableHead>state_prov </TableHead>
-                <TableHead>country </TableHead>
-                <TableHead>region </TableHead>
-                <TableHead>prop_url </TableHead>
-                <TableHead>latitude </TableHead>
-                <TableHead>longitude </TableHead>
-                <TableHead>accuracy </TableHead>
+                <TableHead>No.</TableHead>
+                <TableHead>Id</TableHead>
+                <TableHead>Name</TableHead>
+                <TableHead>Alias</TableHead>
+                <TableHead>Mineral Belt</TableHead>
+                <TableHead2>Owners </TableHead2>
+                <TableHead> Location </TableHead>
+                <TableHead> Area</TableHead>
+                <TableHead>State / Province </TableHead>
+                <TableHead>Country </TableHead>
+                <TableHead>Region </TableHead>
+                <TableHead>Url </TableHead>
+                <TableHead>Latitude </TableHead>
+                <TableHead>Longitude </TableHead>
+                <TableHead>Accuracy </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -160,8 +157,7 @@ const SyncPropTable = ({ data }) => {
                     <TableCell>{data.propertyid}</TableCell>
                     <TableCell>{data.prop_name}</TableCell>
                     <TableCell>{data.prop_alias}</TableCell>
-                    <TableCell>{data.prop_alias}</TableCell>
-                    <TableCell>{data.prop_alias}</TableCell>
+
                     <TableCell>{data.min_belt}</TableCell>
                     <TableCell2>{data.owners}</TableCell2>
                     <TableCell>{data.prop_loc}</TableCell>

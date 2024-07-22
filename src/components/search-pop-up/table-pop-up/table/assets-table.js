@@ -129,24 +129,23 @@ const AssetsTable = ({ data }) => {
           <Table className="">
             <TableHeader>
               <TableRow className="">
-                <TableHead>assetno</TableHead>
-                <TableHead>asset_name</TableHead>
-                <TableHead>asset_name</TableHead>
-                <TableHead>asset_type</TableHead>
-                <TableHead>status</TableHead>
+                <TableHead>No.</TableHead>
+                <TableHead>Name</TableHead>
+                <TableHead>Type</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Stage</TableHead>
 
-                <TableHead>dev_stage</TableHead>
-                <TableHead className="w-[350px]">commodities</TableHead>
-                <TableHead className="w-[150px]">area </TableHead>
-                <TableHead> state_prov </TableHead>
-                <TableHead> country</TableHead>
-                <TableHead>region </TableHead>
-                <TableHead2>accuracy </TableHead2>
-                <TableHead>owners </TableHead>
-                <TableHead>property </TableHead>
-                <TableHead>latitude </TableHead>
-                <TableHead>longitude </TableHead>
-                <TableHead>assetid </TableHead>
+                <TableHead>Commodities</TableHead>
+                <TableHead className="w-[350px]">Area</TableHead>
+                <TableHead className="w-[150px]">State / Province </TableHead>
+                <TableHead> Country </TableHead>
+                <TableHead> Region</TableHead>
+                <TableHead>Accuracy </TableHead>
+                <TableHead2>Owners </TableHead2>
+                <TableHead>Property </TableHead>
+                <TableHead>Latitude </TableHead>
+                <TableHead>Longitude </TableHead>
+                <TableHead>Id </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

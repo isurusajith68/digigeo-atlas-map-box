@@ -129,19 +129,19 @@ const SyncClaimLinkTable = ({ data }) => {
           <Table className="">
             <TableHeader>
               <TableRow className="">
-                <TableHead>propno</TableHead>
-                <TableHead>prop_name</TableHead>
-                <TableHead>prop_alias</TableHead>
-                <TableHead2>owners</TableHead2>
-                <TableHead>state_prov</TableHead>
-                <TableHead>country</TableHead>
-                <TableHead>region</TableHead>
-                <TableHead>prop_url </TableHead>
-                <TableHead>status </TableHead>
-                <TableHead> map_area</TableHead>
-                <TableHead>area_ha </TableHead>
-                <TableHead>prop_loc </TableHead>
-                <TableHead>propertyid </TableHead>
+                <TableHead>No.</TableHead>
+                <TableHead>Name</TableHead>
+                <TableHead>Alias</TableHead>
+                <TableHead2>Owners</TableHead2>
+                <TableHead>State / Province</TableHead>
+                <TableHead>Country</TableHead>
+                <TableHead>Region</TableHead>
+                <TableHead>Url </TableHead>
+                <TableHead>Status </TableHead>
+                <TableHead> Map Area</TableHead>
+                <TableHead> Area</TableHead>
+                <TableHead>Location </TableHead>
+                <TableHead>Id </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
