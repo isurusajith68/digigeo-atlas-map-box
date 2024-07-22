@@ -40,7 +40,7 @@ const NavBar = () => {
           <div className="flex space-x-7">
             <Link href="/" className=" flex gap-2 justify-center items-center">
               <HomeIcon />
-              Home t
+              Home
             </Link>
             <Link href="#" className=" flex gap-2 justify-center items-center">
               <CircleHelp />
