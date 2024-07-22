@@ -112,7 +112,9 @@ const SearchPopUp = () => {
         <MinimizeSearchPopup />
       ) : (
         <Draggable className="resize overflow-auto">
-          <div className="absolute flex top-32 left-40 z-10 bg-background ring ring-gray-500 shadow-sm text-foreground  rounded-lg  w-[500px] flex-col  min-w-[700px] min-h-[320px] maximized">
+          <div
+            className={`absolute flex top-32 left-40 z-10 bg-background ring ring-gray-500 shadow-sm text-foreground  rounded-lg  w-[500px] flex-col  min-w-[700px] min-h-[320px] `}
+          >
             <div className="flex justify-between w-full border-b p-2 bg-slate-400 read-only rounded-t-lg">
               <div className="flex items-center justify-center">
                 <h1 className="font-semibold text-white">Global Search</h1>
