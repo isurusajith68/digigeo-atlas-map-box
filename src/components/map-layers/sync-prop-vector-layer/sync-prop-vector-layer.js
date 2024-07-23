@@ -59,7 +59,7 @@ const SyncPropVectorLayer = () => {
     const f = async (limit, offset) => {
       setSyncPropLoading("loading");
       const response = await fetch(
-        "https://atlas.ceyinfo.cloud/matlas/all_tbl_sync_property_xy",
+        "${process.env.NEXT_PUBLIC_API_URL}/matlas/all_tbl_sync_property_xy",
         { cache: "no-store" }
       );
       if (!response.ok) {
@@ -67,8 +67,6 @@ const SyncPropVectorLayer = () => {
       }
 
       const d = await response.json();
-
-      
 
       const newFeatures = d.data.map((item) => ({
         type: "Feature",
@@ -82,9 +80,9 @@ const SyncPropVectorLayer = () => {
           },
           coordinates: [item.x, item.y],
         },
-        properties:{
-          prop_name:item.prop_name
-        }
+        properties: {
+          prop_name: item.prop_name,
+        },
       }));
       setSyncPropLoading("loaded");
       setsyncPropertyFeatures((pre) => ({

@@ -21,7 +21,7 @@ const SyncPropLayer = () => {
   const getSyncPropertiesGeometry = React.useCallback(async () => {
     const f = async (limit, offset) => {
       const res = await fetch(
-        `https://atlas.ceyinfo.cloud/matlas/all_tbl_sync_property_4326`,
+        `${process.env.NEXT_PUBLIC_API_URL}/matlas/all_tbl_sync_property_4326`,
         { cache: "no-store" }
       );
       const d = await res.json();

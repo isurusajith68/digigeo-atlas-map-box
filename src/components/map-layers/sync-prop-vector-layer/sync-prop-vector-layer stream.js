@@ -59,7 +59,7 @@ const SyncPropVectorLayer = () => {
     const f = async (limit, offset) => {
       setSyncPropLoading("loading");
       const response = await fetch(
-        "https://atlas.ceyinfo.cloud/matlas/all_tbl_sync_property_stream"
+        "${process.env.NEXT_PUBLIC_API_URL}/matlas/all_tbl_sync_property_stream"
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");

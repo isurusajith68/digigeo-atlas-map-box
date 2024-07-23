@@ -33,7 +33,7 @@ const AssetsClusterSearchLayer = () => {
   }, []);
 
   const assetLoaderFunc = useCallback((extent, resolution, projection) => {
-    // const url = `https://atlas.ceyinfo.cloud/matlas/search_tbl_sync_asset_xy`;
+    // const url = `${process.env.NEXT_PUBLIC_API_URL}/matlas/search_tbl_sync_asset_xy`;
     // setAssetsLayerLoading("loading");
     // fetch(url, {
     //   method: "GET",

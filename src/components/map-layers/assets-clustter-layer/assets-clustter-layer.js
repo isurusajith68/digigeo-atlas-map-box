@@ -28,7 +28,7 @@ const AssetsClusterLayer = () => {
   }, []);
 
   const assetLoaderFunc = useCallback((extent, resolution, projection) => {
-    const url = `https://atlas.ceyinfo.cloud/matlas/all_tbl_sync_asset_xy`;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/matlas/all_tbl_sync_asset_xy`;
     setAssetsLayerLoading("loading");
     fetch(url, {
       method: "GET",

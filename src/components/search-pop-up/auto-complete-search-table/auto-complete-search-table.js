@@ -49,7 +49,7 @@ const AutoCompleteSearchTable = () => {
   const fetchPropertyPointLayer = useCallback(() => {
     setPropertyPointSearchLoading(true);
     fetch(
-      `https://atlas.ceyinfo.cloud/matlas/propertypointnamesearch/${searchInput}`
+      `${process.env.NEXT_PUBLIC_API_URL}/matlas/propertypointnamesearch/${searchInput}`
     )
       .then((res) => res.json())
       .then((p) => {
@@ -65,7 +65,7 @@ const AutoCompleteSearchTable = () => {
   const fetchPropertyOutLineLayer = useCallback(() => {
     setPropertyOutLineSearchLoading(true);
     fetch(
-      `https://atlas.ceyinfo.cloud/matlas/propertyoutlinenamesearch/${searchInput}`
+      `${process.env.NEXT_PUBLIC_API_URL}/matlas/propertyoutlinenamesearch/${searchInput}`
     )
       .then((res) => res.json())
       .then((a) => {
@@ -80,7 +80,9 @@ const AutoCompleteSearchTable = () => {
 
   const fetchAssetsLayer = useCallback(() => {
     setAssetsSearchLoading(true);
-    fetch(`https://atlas.ceyinfo.cloud/matlas/assetnamesearch/${searchInput}`)
+    fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/matlas/assetnamesearch/${searchInput}`
+    )
       .then((res) => res.json())
       .then((a) => {
         setAssetsList(a.data);

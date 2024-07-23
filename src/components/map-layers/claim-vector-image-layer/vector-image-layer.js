@@ -53,7 +53,7 @@ const VectorImageLayer = () => {
     setVectorLayerImageLoading("loading");
 
     const url =
-      `https://atlas.ceyinfo.cloud/matlas/view_tbl01_claims_bb` +
+      `${process.env.NEXT_PUBLIC_API_URL}/matlas/view_tbl01_claims_bb` +
       `/${extent.join("/")}`;
     fetch(url, {
       method: "GET",

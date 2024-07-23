@@ -69,7 +69,7 @@ const SearchPopUp = () => {
   const showPropertyPoint = useCallback(async () => {
     setShowPropertiesPoints(null);
     const res = await fetch(
-      `https://atlas.ceyinfo.cloud/matlas/search_tbl_sync_property_xy/${searchInput}`
+      `${process.env.NEXT_PUBLIC_API_URL}/matlas/search_tbl_sync_property_xy/${searchInput}`
     );
     const data = await res.json();
     setShowPropertiesPoints(data.data);
@@ -79,7 +79,7 @@ const SearchPopUp = () => {
   const showPropertyOutLine = useCallback(async () => {
     setShowPropertiesOutlines(null);
     const res = await fetch(
-      `https://atlas.ceyinfo.cloud/matlas/search_tbl_sync_claimlink_xy/${searchInput}`
+      `${process.env.NEXT_PUBLIC_API_URL}/matlas/search_tbl_sync_claimlink_xy/${searchInput}`
     );
     const data = await res.json();
     setShowPropertiesOutlines(data.data);
@@ -89,7 +89,7 @@ const SearchPopUp = () => {
   const showAssets = useCallback(async () => {
     setShowAssets(null);
     const res = await fetch(
-      `https://atlas.ceyinfo.cloud/matlas/search_tbl_sync_asset_xy/${searchInput}`
+      `${process.env.NEXT_PUBLIC_API_URL}/matlas/search_tbl_sync_asset_xy/${searchInput}`
     );
     const data = await res.json();
     setShowAssets(data.data);

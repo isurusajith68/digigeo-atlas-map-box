@@ -9,7 +9,7 @@ const AreaBoundaryLayer = () => {
   const areaBoundaryImgSourceRef = useRef(null);
 
   const areaLoaderFunc = useCallback((extent, resolution, projection) => {
-    const url = `https://atlas.ceyinfo.cloud/matlas/view_tbl40mapareas`;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/matlas/view_tbl40mapareas`;
     fetch(url, {
       method: "GET",
       mode: "cors",

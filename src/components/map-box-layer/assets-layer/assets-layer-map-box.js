@@ -95,7 +95,7 @@ const AssetsLayerMapBox = () => {
   }, []);
 
   const assetLoaderFunc = useCallback(() => {
-    const url = `https://atlas.ceyinfo.cloud/matlas/assets_byextent_4326`;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/matlas/assets_byextent_4326`;
 
     fetch(url, {
       method: "GET",

@@ -84,7 +84,7 @@ const FPropLayer = ({ mapRef, setfPropRenderCount, fPropRenderCount }) => {
     setFPropertyLoadingPromise("loading");
     console.log("fprop-loading");
     const url =
-      `https://atlas.ceyinfo.cloud/matlas/fprops_byextent` +
+      `${process.env.NEXT_PUBLIC_API_URL}/matlas/fprops_byextent` +
       `/${extent.join("/")}`;
 
     fetch(url, {

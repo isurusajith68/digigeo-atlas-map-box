@@ -49,7 +49,7 @@ const ClaimLinkSearchLayer = () => {
   const syncClaimLinkLoaderFunc = useCallback(
     (showPropertiesOutlines) => {
       // const url =
-      //   `https://atlas.ceyinfo.cloud/matlas/syncclaimlink_byextent` +
+      //   `${process.env.NEXT_PUBLIC_API_URL}/matlas/syncclaimlink_byextent` +
       //   `/${join("/")}`;
       // setVectorClaimLinkLoading("loading");
       // fetch(url, {

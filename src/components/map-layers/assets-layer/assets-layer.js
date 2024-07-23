@@ -80,7 +80,7 @@ const AssetsLayer = () => {
 
   const assetLoaderFunc = useCallback((extent, resolution, projection) => {
     const url =
-      `https://atlas.ceyinfo.cloud/matlas/assets_byextent` +
+      `${process.env.NEXT_PUBLIC_API_URL}/matlas/assets_byextent` +
       `/${extent.join("/")}`;
     setAssetsLayerLoading("loading");
     fetch(url, {

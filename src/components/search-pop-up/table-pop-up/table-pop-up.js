@@ -45,7 +45,7 @@ const TablePopUp = () => {
     try {
       setLoadingPropertyTable(true);
       const res = await fetch(
-        `https://atlas.ceyinfo.cloud/matlas/searchdetails_tbl_sync_property/${searchText}`
+        `${process.env.NEXT_PUBLIC_API_URL}/matlas/searchdetails_tbl_sync_property/${searchText}`
       );
 
       const data = await res.json();
@@ -61,7 +61,7 @@ const TablePopUp = () => {
     try {
       setLoadingAssetTable(true);
       const res = await fetch(
-        `https://atlas.ceyinfo.cloud/matlas/searchdetails_tbl_sync_asset/${searchText}`
+        `${process.env.NEXT_PUBLIC_API_URL}/matlas/searchdetails_tbl_sync_asset/${searchText}`
       );
 
       const data = await res.json();
@@ -77,7 +77,7 @@ const TablePopUp = () => {
     try {
       setLoadingClaimLinkTable(true);
       const res = await fetch(
-        `https://atlas.ceyinfo.cloud/matlas/searchdetails_tbl_sync_claimlink/${searchText}`
+        `${process.env.NEXT_PUBLIC_API_URL}/matlas/searchdetails_tbl_sync_claimlink/${searchText}`
       );
 
       const data = await res.json();
